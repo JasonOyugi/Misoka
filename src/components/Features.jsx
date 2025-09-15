@@ -69,7 +69,7 @@ export const BentoCard = ({ src, title, description, isComingSoon }) => {
         <div>
           <h1 className="bento-title special-font">{title}</h1>
           {description && (
-            <p className="mt-3 max-w-64 text-xs md:text-base">{description}</p>
+            <p className="mt-3 text-xs md:text-base">{description}</p>
           )}
         </div>
 
@@ -103,12 +103,12 @@ const Features = () => (
     <div className="container mx-auto px-3 md:px-10">
       <div className="px-5 py-32">
         <p className="font-circular-web text-lg text-blue-50">
-          Into the Metagame Layer
+          It's time to lock-in!
         </p>
-        <p className="max-w-md font-circular-web text-lg text-blue-50 opacity-50">
-          Immerse yourself in a rich and ever-expanding universe where a vibrant
-          array of products converge into an interconnected overlay experience
-          on your world.
+        <p className="font-circular-web text-lg text-blue-50 opacity-50">
+          We are building Misoka as a land-based asset play - with strong existing networks, real-time field data, state of the art germplasm and advanced analytical tools,
+          we optimize land-based value chains like never before. From genetics to markets, 
+          our bread and butter is economic system engineering, and it can be yours to! 
         </p>
       </div>
 
@@ -117,10 +117,10 @@ const Features = () => (
           src="videos/feature-1.mp4"
           title={
             <>
-              radia<b>n</b>t
+              The Art and Science of <b>Agroforestry</b> Investing
             </>
           }
-          description="A cross-platform metagame app, turning your activities across Web2 and Web3 games into a rewarding adventure."
+          description="Combine Site Species Matching Tools (SSMTs), extensive trial data and deep mathematical analysis to maximise returns on tree planting."
           isComingSoon
         />
       </BentoTilt>
@@ -131,23 +131,23 @@ const Features = () => (
             src="videos/feature-2.mp4"
             title={
               <>
-                zig<b>m</b>a
+                Explore <b>Genetics</b>
               </>
             }
-            description="An anime and gaming-inspired NFT collection - the IP primed for expansion."
+            description="Find and plant the latest generation of tree species, hybrids and clones"
             isComingSoon
           />
         </BentoTilt>
 
-        <BentoTilt className="bento-tilt_1 row-span-1 ms-32 md:col-span-1 md:ms-0">
+        <BentoTilt className="bento-tilt_1 row-span-1 text-black-100 ms-32 md:col-span-1 md:ms-0">
           <BentoCard
             src="videos/feature-3.mp4"
             title={
               <>
-                n<b>e</b>xus
+                Market <b>Analysis</b> 
               </>
             }
-            description="A gamified social hub, adding a new dimension of play to social interaction for Web3 communities."
+            description="Understand and find the markets + map and calculate the routes to market = viable and optimal market access in real-time"
             isComingSoon
           />
         </BentoTilt>
@@ -157,16 +157,16 @@ const Features = () => (
             src="videos/feature-4.mp4"
             title={
               <>
-                az<b>u</b>l
+                Project <b>Development </b>
               </>
             }
-            description="A cross-world AI Agent - elevating your gameplay to be more fun and productive."
+            description="Create, develop, trial and monitor your agroforestry project with AI"
             isComingSoon
           />
         </BentoTilt>
 
         <BentoTilt className="bento-tilt_2">
-          <div className="flex size-full flex-col justify-between bg-violet-300 p-5">
+          <div className="flex size-full flex-col justify-between bg-green-300 p-5">
             <h1 className="bento-title special-font max-w-64 text-black">
               M<b>o</b>re co<b>m</b>ing s<b>o</b>on.
             </h1>
