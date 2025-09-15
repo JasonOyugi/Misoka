@@ -12,12 +12,21 @@ gsap.registerPlugin(ScrollTrigger);
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [hasClicked, setHasClicked] = useState(false);
-
   const [loading, setLoading] = useState(true);
   const [loadedVideos, setLoadedVideos] = useState(0);
+  const [isHovering, setIsHovering] = useState(false);
 
   const totalVideos = 4;
   const nextVdRef = useRef(null);
+  const previewVideoRef = useRef(null);
+
+  // Video labels - you can edit these as needed
+  const videoLabels = [
+    "Welcome",
+    "Genetics",
+    "Markets",
+    "Analysis"
+  ];
 
   const handleVideoLoad = () => {
     setLoadedVideos((prev) => prev + 1);
@@ -31,8 +40,22 @@ const Hero = () => {
 
   const handleMiniVdClick = () => {
     setHasClicked(true);
-
     setCurrentIndex((prevIndex) => (prevIndex % totalVideos) + 1);
+  };
+
+  const handleHoverStart = () => {
+    setIsHovering(true);
+    if (previewVideoRef.current) {
+      previewVideoRef.current.currentTime = 0;
+      previewVideoRef.current.play();
+    }
+  };
+
+  const handleHoverEnd = () => {
+    setIsHovering(false);
+    if (previewVideoRef.current) {
+      previewVideoRef.current.pause();
+    }
   };
 
   useGSAP(
@@ -86,7 +109,6 @@ const Hero = () => {
     <div className="relative h-dvh w-screen overflow-x-hidden">
       {loading && (
         <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
-          {/* https://uiverse.io/G4b413l/tidy-walrus-92 */}
           <div className="three-body">
             <div className="three-body__dot"></div>
             <div className="three-body__dot"></div>
@@ -100,19 +122,23 @@ const Hero = () => {
         className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75"
       >
         <div>
-          <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
+          <div 
+            className="absolute-center absolute z-50 h-48 w-64 cursor-pointer overflow-hidden transition-all duration-700 ease-in-out"
+            onMouseEnter={handleHoverStart}
+            onMouseLeave={handleHoverEnd}
+          >
             <VideoPreview>
               <div
                 onClick={handleMiniVdClick}
                 className="origin-center scale-50 opacity-0 transition-all duration-500 ease-in hover:scale-100 hover:opacity-100"
               >
                 <video
-                  ref={nextVdRef}
+                  ref={previewVideoRef}
                   src={getVideoSrc((currentIndex % totalVideos) + 1)}
                   loop
                   muted
                   id="current-video"
-                  className="size-64 origin-center scale-150 object-cover object-center"
+                  className="h-full w-full origin-center scale-150 object-cover object-center"
                   onLoadedData={handleVideoLoad}
                 />
               </div>
@@ -125,7 +151,7 @@ const Hero = () => {
             loop
             muted
             id="next-video"
-            className="absolute-center invisible absolute z-20 size-64 object-cover object-center"
+            className="absolute-center invisible absolute z-20 h-48 w-64 object-cover object-center"
             onLoadedData={handleVideoLoad}
           />
           <video
@@ -140,33 +166,32 @@ const Hero = () => {
           />
         </div>
 
-        <h1 className="special-font hero-heading absolute bottom-5 right-5 z-40 text-blue-75">
-          G<b>A</b>MING
-        </h1>
+        {/* Video label display - bottom right corner */}
+        <div className="absolute bottom-5 right-5 z-40 rounded-lg bg-black/50 px-4 py-2 backdrop-blur-sm">
+          <p className="special-font text-lg text-white">
+            {videoLabels[currentIndex - 1]}
+          </p>
+        </div>
 
         <div className="absolute left-0 top-0 z-40 size-full">
           <div className="mt-24 px-5 sm:px-10">
-            <h1 className="special-font hero-heading text-blue-100">
-              redefi<b>n</b>e
+            <h1 className="special-font text-6xl md:text-8xl text-blue-100">
+            <b>Misoka</b>
             </h1>
 
-            <p className="mb-5 max-w-64 font-robert-regular text-blue-100">
-              Enter the Metagame Layer <br /> Unleash the Play Economy
+            <p className="mb-5 max-w-[280px] font-robert-regular text-blue-100 whitespace-nowrap">
+              Create, develop and own your agroforestry investment <br/>  
             </p>
 
             <Button
-              id="watch-trailer"
-              title="Watch trailer"
+              id="create"
+              title="create"
               leftIcon={<TiLocationArrow />}
-              containerClass="bg-yellow-300 flex-center gap-1"
+              containerClass="bg-blue-300 flex-center gap-1"
             />
           </div>
         </div>
       </div>
-
-      <h1 className="special-font hero-heading absolute bottom-5 right-5 text-black">
-        G<b>A</b>MING
-      </h1>
     </div>
   );
 };
