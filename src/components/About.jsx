@@ -30,18 +30,17 @@ const About = () => {
     <div id="about" className="min-h-screen w-screen">
       <div className="relative mb-8 mt-36 flex flex-col items-center gap-5">
         <p className="font-general text-sm uppercase md:text-[10px]">
-          Welcome to Misoka
+          The information hub for forestry in the EA
         </p>
 
         <AnimatedTitle
-          title="Ch<b>ang</b>e your world <br /> own the <b>future</b>"
-          containerClass="mt-5 !text-black text-center"
+          title="Who said <b>money</b> doesn't <br/> grow on <b>trees</b>?"
+          containerClass="mt-1 !text-black text-center"
         />
 
         <div className="about-subtext">
           <p className="text-gray-500">
-          The solution to high-impact, high-return investments in Africa is here:
-          We are specialists in turning underutilized/degraded land into high-return assets.
+          From genetics to investments, discover the true potential of our trees.
           </p>
         </div>
       </div>

@@ -176,18 +176,18 @@ const Hero = () => {
         <div className="absolute left-0 top-0 z-40 size-full">
           <div className="mt-24 px-5 sm:px-10">
             <h1 className="special-font text-6xl md:text-8xl text-blue-100">
-            <b>Misoka</b>
+            <b>EA Forests</b>
             </h1>
 
             <p className="mb-5 max-w-[280px] font-robert-regular text-blue-100 whitespace-nowrap">
-              Create, develop and own your agroforestry investment <br/>  
+              Everything you need to know about investing in East African Forests <br/>  
             </p>
 
             <Button
-              id="create"
-              title="create"
+              id="Trial"
+              title="Trial"
               leftIcon={<TiLocationArrow />}
-              containerClass="bg-blue-300 flex-center gap-1"
+              containerClass="bg-green-500 flex-center gap-1"
             />
           </div>
         </div>

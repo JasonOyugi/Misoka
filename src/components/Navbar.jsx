@@ -6,7 +6,11 @@ import { TiLocationArrow } from "react-icons/ti";
 
 import Button from "./Button";
 
-const navItems = ["About", "Features", "Community", "Contact"];
+const navItems = [
+  { label: "Features", id: "about" },
+  { label: "Community", id: "story" },
+  { label: "Contact", id: "contact" },
+];
 
 const NavBar = () => {
   // State for toggling audio and visual indicator
@@ -29,6 +33,8 @@ const NavBar = () => {
 
   // Manage audio playback
   useEffect(() => {
+    if (!audioElementRef.current) return;
+
     if (isAudioPlaying) {
       audioElementRef.current.play();
     } else {
@@ -36,17 +42,17 @@ const NavBar = () => {
     }
   }, [isAudioPlaying]);
 
+  // Navbar visibility on scroll
   useEffect(() => {
+    if (!navContainerRef.current) return;
+
     if (currentScrollY === 0) {
-      // Topmost position: show navbar without floating-nav
       setIsNavVisible(true);
       navContainerRef.current.classList.remove("floating-nav");
     } else if (currentScrollY > lastScrollY) {
-      // Scrolling down: hide navbar and apply floating-nav
       setIsNavVisible(false);
       navContainerRef.current.classList.add("floating-nav");
     } else if (currentScrollY < lastScrollY) {
-      // Scrolling up: show navbar with floating-nav
       setIsNavVisible(true);
       navContainerRef.current.classList.add("floating-nav");
     }
@@ -54,11 +60,15 @@ const NavBar = () => {
     setLastScrollY(currentScrollY);
   }, [currentScrollY, lastScrollY]);
 
+  // GSAP animation
   useEffect(() => {
+    if (!navContainerRef.current) return;
+
     gsap.to(navContainerRef.current, {
       y: isNavVisible ? 0 : -100,
       opacity: isNavVisible ? 1 : 0,
       duration: 0.2,
+      ease: "power2.out",
     });
   }, [isNavVisible]);
 
@@ -69,7 +79,7 @@ const NavBar = () => {
     >
       <header className="absolute top-1/2 w-full -translate-y-1/2">
         <nav className="flex size-full items-center justify-between p-4">
-          {/* Logo and Product button */}
+          {/* Logo and Join button */}
           <div className="flex items-center gap-7">
             <img src="/img/logo.png" alt="logo" className="w-10" />
 
@@ -81,16 +91,16 @@ const NavBar = () => {
             />
           </div>
 
-          {/* Navigation Links and Audio Button */}
+          {/* Navigation links and audio */}
           <div className="flex h-full items-center">
             <div className="hidden md:block">
-              {navItems.map((item, index) => (
+              {navItems.map(({ label, id }) => (
                 <a
-                  key={index}
-                  href={`#${item.toLowerCase()}`}
+                  key={id}
+                  href={`#${id}`}
                   className="nav-hover-btn"
                 >
-                  {item}
+                  {label}
                 </a>
               ))}
             </div>
@@ -98,6 +108,7 @@ const NavBar = () => {
             <button
               onClick={toggleAudioIndicator}
               className="ml-10 flex items-center space-x-0.5"
+              aria-label="Toggle background audio"
             >
               <audio
                 ref={audioElementRef}
@@ -105,15 +116,14 @@ const NavBar = () => {
                 src="/audio/loop.mp3"
                 loop
               />
+
               {[1, 2, 3, 4].map((bar) => (
                 <div
                   key={bar}
                   className={clsx("indicator-line", {
                     active: isIndicatorActive,
                   })}
-                  style={{
-                    animationDelay: `${bar * 0.1}s`,
-                  }}
+                  style={{ animationDelay: `${bar * 0.1}s` }}
                 />
               ))}
             </button>
